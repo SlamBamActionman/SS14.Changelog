@@ -173,7 +173,8 @@ namespace SS14.Changelog.Controllers
             var changelogBody = body.Substring(match.Index + match.Length);
             var labels = new List<string>();
             foreach (var label in pr.Labels)
-                labels.Add(label.Name);
+                if (config.IncludedLabels.Contains(label.Name))
+                    labels.Add(label.Name);
 
             var currentCategory = ChangelogData.MainCategory;
             var entries = new List<(string, ChangelogData.Change)>();

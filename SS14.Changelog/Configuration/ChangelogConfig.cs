@@ -38,5 +38,10 @@ namespace SS14.Changelog.Configuration
         /// and are written to a separate <c>Category.yml</c> file in the changelog data.
         /// </remarks>
         public string[] ExtraCategories { get; set; } = Array.Empty<string>();
+        
+        /// <summary>
+        /// The names of labels which should be checked for and included in the changelog, if they exist on the related PR.
+        /// </summary>
+        public string[] IncludedLabels { get; set; } = Array.Empty<string>();
     }
 }
