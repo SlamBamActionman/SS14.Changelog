@@ -18,11 +18,14 @@ namespace SS14.Changelog
         DateTimeOffset? MergedAt,
         GHPullRequestBase Base,
         int Number,
-        string Html_url);
+        string Html_url,
+        ImmutableArray<GHLabel> Labels);
 
     public sealed record GHPullRequestBase(string Ref);
 
     public sealed record GHUser(string Login);
+    public sealed record GHLabel(string Name);
+
 
     public sealed record GHPushEvent(ImmutableArray<GHPushedCommit> Commits, string Ref);
 

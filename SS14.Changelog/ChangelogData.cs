@@ -19,6 +19,7 @@ namespace SS14.Changelog
         public DateTimeOffset Time { get; }
         public int Number { get; init; }
         public required string HtmlUrl { get; init; }
+        public ImmutableArray<string> Labels { get; init; }
 
         public sealed record CategoryData(string Category, ImmutableArray<Change> Changes);
 

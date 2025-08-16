@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
 using SS14.Changelog.Configuration;
@@ -29,7 +30,7 @@ namespace SS14.Changelog.Tests
 
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("PJB"), time, new GHPullRequestBase("master"), 123,
-                "https://www.example.com");
+                "https://www.example.com", [ new GHLabel("test_label")]);
             var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
 
             Assert.Multiple(() =>
@@ -49,6 +50,7 @@ namespace SS14.Changelog.Tests
                         new(ChangelogData.ChangeType.Fix, "B"),
                         new(ChangelogData.ChangeType.Fix, "C"),
                     }));
+                Assert.That(parsed.Labels, Is.EqualTo(new string[] { "test_label" }));
             });
         }
 
@@ -67,7 +69,7 @@ namespace SS14.Changelog.Tests
 
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
-                "https://www.example.com");
+                "https://www.example.com", [ new GHLabel("test_label")]);
             var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
 
             Assert.Multiple(() =>
@@ -84,6 +86,7 @@ namespace SS14.Changelog.Tests
                         new(ChangelogData.ChangeType.Add, "Did the thing"),
                         new(ChangelogData.ChangeType.Remove, "Removed the thing"),
                     }));
+                Assert.That(parsed.Labels, Is.EqualTo(new string[] { "test_label" }));
             });
         }
 
@@ -105,7 +108,7 @@ namespace SS14.Changelog.Tests
 
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
-                "https://www.example.com");
+                "https://www.example.com", [ new GHLabel("test_label")]);
             var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
 
             Assert.Multiple(() =>
@@ -122,6 +125,7 @@ namespace SS14.Changelog.Tests
                         new(ChangelogData.ChangeType.Add, "Did the thing"),
                         new(ChangelogData.ChangeType.Remove, "Removed the thing"),
                     }));
+                Assert.That(parsed.Labels, Is.EqualTo(new string[] { "test_label" }));
             });
         }
 
@@ -133,7 +137,7 @@ namespace SS14.Changelog.Tests
 
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("AJCM-Git"), time, new GHPullRequestBase("master"), 123,
-                "https://www.example.com");
+                "https://www.example.com", [ new GHLabel("test_label")]);
             var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
 
             Assert.Multiple(() =>
@@ -149,6 +153,7 @@ namespace SS14.Changelog.Tests
                     {
                         new(ChangelogData.ChangeType.Add, "Makes gravity generator and windows repairable with a lit welding tool"),
                     }));
+                Assert.That(parsed.Labels, Is.EqualTo(new string[] { "test_label" }));
             });
         }
 
@@ -168,7 +173,7 @@ namespace SS14.Changelog.Tests
 
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
-                "https://www.example.com");
+                "https://www.example.com", [ new GHLabel("test_label")]);
             var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
 
             Assert.Multiple(() =>
@@ -185,6 +190,7 @@ namespace SS14.Changelog.Tests
                         new(ChangelogData.ChangeType.Add, "Did the thing"),
                         new(ChangelogData.ChangeType.Remove, "Removed the thing"),
                     }));
+                Assert.That(parsed.Labels, Is.EqualTo(new string[] { "test_label" }));
             });
         }
 
@@ -208,7 +214,7 @@ namespace SS14.Changelog.Tests
 
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
-                "https://www.example.com");
+                "https://www.example.com", [ new GHLabel("test_label")]);
             var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { ExtraCategories = new []{"Admin"}});
 
             Assert.Multiple(() =>
@@ -233,6 +239,7 @@ namespace SS14.Changelog.Tests
                         new(ChangelogData.ChangeType.Add, "Did more thing"),
                         new(ChangelogData.ChangeType.Remove, "Removed more thing"),
                     }));
+                Assert.That(parsed.Labels, Is.EqualTo(new string[] { "test_label" }));
             });
         }
 
@@ -252,7 +259,7 @@ namespace SS14.Changelog.Tests
 
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
-                "https://www.example.com");
+                "https://www.example.com", [ new GHLabel("test_label")]);
             var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { ExtraCategories = new []{"Admin"}});
 
             Assert.Multiple(() =>
@@ -270,6 +277,7 @@ namespace SS14.Changelog.Tests
                         new(ChangelogData.ChangeType.Remove, "Removed the thing"),
                         new(ChangelogData.ChangeType.Add, "WOW"),
                     }));
+                Assert.That(parsed.Labels, Is.EqualTo(new string[] { "test_label" }));
             });
         }
     }

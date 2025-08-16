@@ -171,6 +171,9 @@ namespace SS14.Changelog.Controllers
 
             var author = match.Groups[1].Success ? match.Groups[1].Value.Trim() : pr.User.Login;
             var changelogBody = body.Substring(match.Index + match.Length);
+            var labels = new List<string>();
+            foreach (var label in pr.Labels)
+                labels.Add(label.Name);
 
             var currentCategory = ChangelogData.MainCategory;
             var entries = new List<(string, ChangelogData.Change)>();
@@ -217,7 +220,8 @@ namespace SS14.Changelog.Controllers
             return new ChangelogData(author, finalCategories, pr.MergedAt ?? DateTimeOffset.Now)
             {
                 Number = pr.Number,
-                HtmlUrl = pr.Html_url
+                HtmlUrl = pr.Html_url,
+                Labels = labels.ToImmutableArray(),
             };
         }
     }
