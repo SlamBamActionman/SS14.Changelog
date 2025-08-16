@@ -31,7 +31,7 @@ namespace SS14.Changelog.Tests
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("PJB"), time, new GHPullRequestBase("master"), 123,
                 "https://www.example.com", [ new GHLabel("test_label")]);
-            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
+            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { IncludedLabels = ["test_label"] });
 
             Assert.Multiple(() =>
             {
@@ -70,7 +70,7 @@ namespace SS14.Changelog.Tests
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
                 "https://www.example.com", [ new GHLabel("test_label")]);
-            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
+            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { IncludedLabels = ["test_label"] });
 
             Assert.Multiple(() =>
             {
@@ -109,7 +109,7 @@ namespace SS14.Changelog.Tests
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
                 "https://www.example.com", [ new GHLabel("test_label")]);
-            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
+            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { IncludedLabels = ["test_label"] });
 
             Assert.Multiple(() =>
             {
@@ -138,7 +138,7 @@ namespace SS14.Changelog.Tests
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("AJCM-Git"), time, new GHPullRequestBase("master"), 123,
                 "https://www.example.com", [ new GHLabel("test_label")]);
-            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
+            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { IncludedLabels = ["test_label"] });
 
             Assert.Multiple(() =>
             {
@@ -174,7 +174,7 @@ namespace SS14.Changelog.Tests
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
                 "https://www.example.com", [ new GHLabel("test_label")]);
-            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig());
+            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { IncludedLabels = ["test_label"] });
 
             Assert.Multiple(() =>
             {
@@ -215,7 +215,7 @@ namespace SS14.Changelog.Tests
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
                 "https://www.example.com", [ new GHLabel("test_label")]);
-            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { ExtraCategories = new []{"Admin"}});
+            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { ExtraCategories = ["Admin"], IncludedLabels = ["test_label"] });
 
             Assert.Multiple(() =>
             {
@@ -260,7 +260,7 @@ namespace SS14.Changelog.Tests
             var time = new DateTimeOffset(2021, 1, 1, 1, 1, 1, TimeSpan.Zero);
             var pr = new GHPullRequest(true, text, new GHUser("Swept"), time, new GHPullRequestBase("master"), 123,
                 "https://www.example.com", [ new GHLabel("test_label")]);
-            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { ExtraCategories = new []{"Admin"}});
+            var parsed = WebhookController.ParsePRBody(pr, new ChangelogConfig { ExtraCategories = ["Admin"], IncludedLabels = ["test_label"] });
 
             Assert.Multiple(() =>
             {
